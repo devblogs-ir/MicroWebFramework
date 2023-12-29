@@ -18,12 +18,36 @@ public class ExceptionHandlingPipe : Pipe
             "starting exception handling".Dump();
             Next(context);
         }
-        catch (InvalidIpAddressException ex) { "Invalid ip address ".Dump(ex.Message); HandleException(context, HttpStatusCode.Unauthorized, "Invalid ip address "); }
-        catch (InaccessibilityException ex) { "Invalid request from ".Dump(ex.Message); HandleException(context, HttpStatusCode.Unauthorized, "Invalid request from "); }
-        catch (UnknownIpAddressException ex) { "Ip address is unknown ".Dump(ex.Message); HandleException(context, HttpStatusCode.Unauthorized, "Ip address is unknown "); }
-        catch (InvalidRequestException ex) { "Url is not valid ".Dump(ex.Message); HandleException(context, HttpStatusCode.NotFound, "Url is not valid"); }
-        catch (NotImplementedPipelineException) { "No pipes have been added to the pipeline".Dump(); HandleException(context, HttpStatusCode.BadGateway, "No pipes have been added to the pipeline"); }
-        catch (Exception ex) { "exception occurod".Dump(ex.Message); HandleException(context, HttpStatusCode.InternalServerError, "exception occurod"); }
+        catch (InvalidIpAddressException ex)
+        {
+            "Invalid ip address ".Dump(ex.Message); // logger
+            HandleException(context, HttpStatusCode.Unauthorized, "Invalid ip address ");
+        }
+        catch (InaccessibilityException ex)
+        {
+            "Invalid request from ".Dump(ex.Message); // logger
+            HandleException(context, HttpStatusCode.Unauthorized, "Invalid request from ");
+        }
+        catch (UnknownIpAddressException ex)
+        {
+            "Ip address is unknown ".Dump(ex.Message); // logger
+            HandleException(context, HttpStatusCode.Unauthorized, "Ip address is unknown ");
+        }
+        catch (InvalidRequestException ex)
+        {
+            "Url is not valid ".Dump(ex.Message); // logger
+            HandleException(context, HttpStatusCode.NotFound, "Url is not valid");
+        }
+        catch (NotImplementedPipelineException)
+        {
+            "No pipes have been added to the pipeline".Dump(); // logger
+            HandleException(context, HttpStatusCode.BadGateway, "No pipes have been added to the pipeline");
+        }
+        catch (Exception ex)
+        {
+            "exception occurod".Dump(ex.Message); // logger
+            HandleException(context, HttpStatusCode.InternalServerError, "exception occurod");
+        }
     }
     private void HandleException(PipelineContext context, HttpStatusCode httpStatusCode, string message)
     {
