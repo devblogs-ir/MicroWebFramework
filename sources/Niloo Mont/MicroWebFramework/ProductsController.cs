@@ -23,6 +23,8 @@ public class ProductsController
         new User() { Id = 4, Name = "User4" },
         new User() { Id = 5, Name = "User5" },
     };
+
+    // Products/GetUserById/{id}
     public void GetUserById(int id)
     {
         if (!users.Any(p => p.Id == id))

@@ -18,6 +18,8 @@ public class OrdersController
         new Order() { Id = 4, Title = "Order4" },
         new Order() { Id = 5, Title = "Order5" },
     };
+
+    // Orders/GetAllOrders
     public void GetAllOrders()
     {
         string ordersJson = JsonSerializer.Serialize(orders, new JsonSerializerOptions
@@ -27,6 +29,8 @@ public class OrdersController
         _httpContext.Response.OutputStream.Write(
                 EncodingService.GetBytes(ordersJson));
     }
+
+    // Orders/GetOrderById/{id}
     public void GetOrderById(int id)
     {
         if (!orders.Any(p => p.Id == id))
