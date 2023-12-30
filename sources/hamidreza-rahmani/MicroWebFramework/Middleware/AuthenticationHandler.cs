@@ -1,4 +1,3 @@
-using Dumpify;
 using MicroWebFramework.pipeline;
 
 namespace MicroWebFramework.Middleware;
@@ -11,18 +10,12 @@ public class AuthenticationHandler : Pipe
 
     public override void Handle(HttpContext httpContext)
     {
-        httpContext.Request.RemoteEndPoint.Address.ToString().Dump("Start auth...");
+        var ipAddress = httpContext?.Request?.RemoteEndPoint?.Address.ToString();
 
-        string ipAddress = httpContext.Request?.RemoteEndPoint?.Address?.ToString();
-        
-        if (ipAddress is null  )
-        {
-            
-        }
-        if (httpContext.IP.StartsWith("185"))
-            throw new BannedIpException("Sorry you are accessing from Islamic Republic.");
+        if (ipAddress is null) throw new BadRequestExeption("BadRequest Exeption");
 
-        httpContext.IP.Dump("End auth...");
+        if (ipAddress.StartsWith("200")) throw new BlockedIpExeption("Blocked Ip Exeption");
+
         _next(httpContext);
     }
 }
