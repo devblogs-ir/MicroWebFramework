@@ -1,0 +1,8 @@
+### get all orders 
+curl --location 'http://localhost:14301/orders/getall' \
+--header 'Authorization: mytoken'
+
+
+### get order by id
+curl --location 'http://localhost:14301/orders/getall/1' \
+--header 'Authorization: mytoken'

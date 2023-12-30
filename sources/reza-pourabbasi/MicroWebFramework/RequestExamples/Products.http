@@ -1,0 +1,8 @@
+### get all products 
+curl --location 'http://localhost:14301/products/getall' \
+--header 'Authorization: mytoken'
+
+
+### get product by id
+curl --location 'http://localhost:14301/products/getall/2' \
+--header 'Authorization: mytoken'
