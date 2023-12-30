@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.5.002.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sources", "sources", "{44A4A685-9F33-4553-B100-3A8D94B366BF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reza-pourabbasi", "reza-pourabbasi", "{623C7870-B26F-46D1-8546-7DD30BD5A38F}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroWebFramework", "sources\reza-pourabbasi\MicroWebFramework\MicroWebFramework.csproj", "{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{623C7870-B26F-46D1-8546-7DD30BD5A38F} = {44A4A685-9F33-4553-B100-3A8D94B366BF}
+		{C97AA94E-B67D-40CE-B3F7-97DFE67285F8} = {623C7870-B26F-46D1-8546-7DD30BD5A38F}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {D84D74CB-DEA0-48A0-A463-6864F53E3158}
+	EndGlobalSection
+EndGlobal
