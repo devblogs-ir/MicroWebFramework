@@ -1,8 +1,9 @@
 ﻿// See https://aka.ms/new-console-template for more information
 
 using System.Net;
-using System.Text;
 using MicroWebFramework;
+using MicroWebFramework.Middleware;
+using MicroWebFramework.pipeline;
 
 var pool = new ObjectPool<StateObject>(() => new StateObject(), 2);
 ;
@@ -21,29 +22,22 @@ while (true)
     var state = pool.Get();
     state.Context = context;
     semaphore.Wait();
-    Task.Run(() => ProcessClient(state));
+    Task.Run(() => ProcessClient(state, context));
 }
 
-async Task ProcessClient(StateObject state)
+async Task ProcessClient(StateObject state, HttpListenerContext context)
 {
     try
     {
-        var context = state.Context;
-        var output = context.Response.OutputStream;
+        var httpContext = new HttpContext { Request = context.Request, Response = context.Response };
+        PiplineBuilder pipelineBuilder = new();
+        var pipeline = pipelineBuilder
+            .Add<AuthenticationHandler>()
+            .Add<CorsHandler>()
+            .Add<EndpointHandler>()
+            .Build();
 
-        //response
-
-
-        var response = "<html><body><h1>Hello, World!</h1></body></html>";
-        var buffer = Encoding.UTF8.GetBytes(response);
-
-        context.Response.ContentType = "text/html";
-        context.Response.ContentLength64 = buffer.Length;
-
-        await output.WriteAsync(buffer, 0, buffer.Length);
-
-        output.Close();
-        context.Response.Close();
+        pipeline(httpContext);
         pool.Return(state);
     }
     catch (Exception ex)
