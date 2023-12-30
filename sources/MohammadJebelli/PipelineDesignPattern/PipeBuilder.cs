@@ -5,37 +5,37 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PipelineDesignPattern
+namespace PipelineDesignPattern;
+
+public class PipeBuilder
 {
-    public class PipeBuilder
+    private List<Type> _pipes = new List<Type>();
+
+    public PipeBuilder AddPipe<TType>()
     {
-        private List<Type> pipes = new List<Type>();
+        _pipes.Add(typeof(TType));
+        return this;
+    }
 
-        public PipeBuilder AddPipe<TType>()
+    public Action<HttpContext>? Build()
+    {
+        Action<HttpContext> firstHandler = null;
+
+        for (int i = _pipes.Count - 1; i >= 0; i--)
         {
-            pipes.Add(typeof(TType));
-            return this;
-        }
-        
-        public Action<HttpContext> Build()
-        {
-            Action<HttpContext> firstHandler = null;
+            var pipeType = _pipes[i];
 
-            for (int i = pipes.Count - 1; i >= 0; i--)
-            {
-                var pipeType = pipes[i];
-                
-                var pipeInstance = (Pipe)Activator.CreateInstance(pipeType, firstHandler);
+            var pipeInstance = (Pipe)Activator.CreateInstance(pipeType, firstHandler);
 
-                firstHandler = pipeInstance.Handle;
-            }
-
-            return firstHandler;
-
-           
+            firstHandler = pipeInstance.Handle;
         }
 
-       
+        return firstHandler;
+
 
     }
+
+
+
 }
+

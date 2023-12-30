@@ -6,24 +6,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PipelineDesignPattern
+namespace PipelineDesignPattern;
+
+public class OrderController
 {
-    public class OrderController
+    private readonly HttpContext _context;
+
+    public OrderController(HttpContext context)
     {
-        private readonly HttpContext _context;
-
-        public OrderController(HttpContext context)
-        {
-            _context = context;            
-        }
-
-        public string GetAll()
-        {
-            return $"Return all orders for IP: {_context.IP}";
-        }
-        public string GetById(string id)
-        {
-            return $"Return order by id {id}";
-        }
+        _context = context;
     }
+
+    public string GetAll() => $"Return all orders for IP: {_context.IP}";
+
+    public string GetById(string id) => $"Return order by id {id}";
+
 }
+

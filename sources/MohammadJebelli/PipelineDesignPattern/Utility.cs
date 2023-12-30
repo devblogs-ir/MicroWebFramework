@@ -4,19 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PipelineDesignPattern
+namespace PipelineDesignPattern;
+
+public static class Utility
 {
-    public static class Utility
+    public const string FAVICON = "favicon.ico";
+    public static string FirstLetterToUpper(this string str)
     {
-        public static string FirstLetterToUpper(this string str)
-        {
-            if (str == null)
-                return null;
+        if (str == null)
+            return null;
 
-            if (str.Length > 1)
-                return char.ToUpper(str[0]) + str.Substring(1);
+        if (str.Length > 1)
+            return char.ToUpper(str[0]) + str.Substring(1);
 
-            return str.ToUpper();
-        }
+        return str.ToUpper();
     }
+
 }
+

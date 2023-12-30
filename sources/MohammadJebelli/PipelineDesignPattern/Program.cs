@@ -19,15 +19,13 @@ while (true)
     var requestUrl = context.Request.Url.AbsolutePath;
 
     // ignore favicon request for chrome
-    if (requestUrl.Contains("favicon.ico"))
+    if (requestUrl.Contains(Utility.FAVICON))
     {
-        context.Response.StatusCode = 404;
+        context.Response.StatusCode = (int)HttpStatusCode.NotFound;
         context.Response.Close();
-
     }
 
     var localPath = context.Request.Url.LocalPath;
-
 
     var httpContext1 = new HttpContext()
     {
@@ -41,16 +39,20 @@ while (true)
         .AddPipe<EndPointPipe>()
         .Build();
 
+    if (handler is not null)
+        handler(httpContext1);
 
-    handler(httpContext1);
-
-    var buffer = Encoding.UTF8.GetBytes(httpContext1.httpResponse);
+    var buffer = Encoding.UTF8.GetBytes(httpContext1.HttpResponse);
 
     context.Response.OutputStream.Write(buffer, 0, buffer.Length);
 
     context.Response.Close();
-
 }
+
+
+Console.ReadKey();
+httpListener.Stop();
+
 
 
 

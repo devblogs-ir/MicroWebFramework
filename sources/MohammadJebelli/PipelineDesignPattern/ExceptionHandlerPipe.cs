@@ -5,30 +5,29 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PipelineDesignPattern
+namespace PipelineDesignPattern;
+
+public class ExceptionHandlerPipe : Pipe
 {
-    public class ExceptionHandlerPipe : Pipe
+    public ExceptionHandlerPipe(Action<HttpContext> next) : base(next)
     {
-        public ExceptionHandlerPipe(Action<HttpContext> next) : base(next)
+    }
+
+    public override void Handle(HttpContext httpContext)
+    {
+        try
         {
-        }
+            "Start exception handling...".Dump();
 
-        public override void Handle(HttpContext httpContext)
-        {
-            try
-            {
-                "Start exception handling...".Dump();
-
-                if (_next is not null)
-                    _next(httpContext);
-
-            }
-            catch (BannedIpException ex)
-            {
-                "Exception catched: ".Dump(ex.Message);
-            }
+            if (_next is not null)
+                _next(httpContext);
 
         }
+        catch (BannedIpException ex)
+        {
+            "Exception catched: ".Dump(ex.Message);
+        }
+
     }
 }
-    
+
