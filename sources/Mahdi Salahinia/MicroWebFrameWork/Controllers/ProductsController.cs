@@ -18,7 +18,9 @@ public class ProductsController
 
     public string GetProductById(int id)
     {
-        return products[id].Name;
+        var res = products.FirstOrDefault(i => i.Id == id);
+
+        return res.Name;
     }
 
     public List<Product> GetAllProducts() { return products; }

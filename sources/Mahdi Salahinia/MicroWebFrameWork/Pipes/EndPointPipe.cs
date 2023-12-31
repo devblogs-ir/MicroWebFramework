@@ -1,4 +1,6 @@
-﻿namespace MicroWebFrameWork.Pipes;
+﻿using System.Text;
+
+namespace MicroWebFrameWork.Pipes;
 
 public class EndPointPipe : BasePipe
 {
@@ -12,11 +14,11 @@ public class EndPointPipe : BasePipe
 
     }
 
-    public override void HandlePipe(HttpContext httpContext)
+    public override void HandlePipe(HttpContext context)
     {
         try
         {
-            var urlParts = httpContext.Url.Split('/');
+            var urlParts = context.Url.Split('/');
 
             var controllerName = urlParts[1];
 
@@ -30,10 +32,10 @@ public class EndPointPipe : BasePipe
             var controllerNameTemplate = $"MicroWebFrameWork.Controllers.{controllerName}Controller";
 
             var controllerType = Type.GetType(controllerNameTemplate);
-            
-            var controllerInstance = Activator.CreateInstance(controllerType!, new[] { httpContext });
 
-            var methodInfo = controllerType!.GetMethod(actionName) ?? throw new Exception();
+            var controllerInstance = Activator.CreateInstance(controllerType);
+
+            var methodInfo = controllerType.GetMethod(actionName) ?? throw new Exception();
 
             var parameterList = methodInfo.GetParameters();
 
@@ -57,7 +59,7 @@ public class EndPointPipe : BasePipe
                 methodInfo.Invoke(controllerInstance, null);
             }
 
-            if (_next is not null) _next(httpContext);
+            if (_next is not null) _next(context);
         }
         catch (Exception ex)
         {
