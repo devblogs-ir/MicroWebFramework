@@ -12,9 +12,9 @@ public class AuthorizationHandler : BaseHandler
     {
         "Start Auth".Dump();
 
-        if (_ipService.IsOriginFromBannedCountries(context.IpAdrress))
+        if (_ipService.IsOriginFromBannedCountries(context.IpAddress))
         {
-            var originCountry = _ipService.GetOriginCountry(context.IpAdrress);
+            var originCountry = _ipService.GetOriginCountry(context.IpAddress);
             throw new AccessingFromBannedCountryException(originCountry?.Name);
         }
 

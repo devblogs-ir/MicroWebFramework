@@ -1,7 +1,4 @@
 namespace MicroWebFramework;
-
-using Dumpify;
-
 public class ProductController
 {
     public void GetUsers(HttpContext httpContext)

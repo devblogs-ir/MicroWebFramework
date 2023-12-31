@@ -1,5 +1,4 @@
-﻿using Dumpify;
-using MicroWebFramework;
+﻿using MicroWebFramework;
 
 var url = "http://localhost:9083";
 IUiAdapter uiAdapter = new HttpAdapter(url);

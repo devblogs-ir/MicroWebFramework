@@ -7,7 +7,7 @@ namespace MicroWebFramework;
 public class HttpAdapter : IUiAdapter
 {
     private readonly HttpListener _listener;
-    private Dictionary<Guid, HttpListenerContext> _unresponsedRequests;
+    private readonly Dictionary<Guid, HttpListenerContext> _unresponsedRequests;
 
     public HttpAdapter(string url)
     {

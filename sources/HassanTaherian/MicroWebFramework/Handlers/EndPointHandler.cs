@@ -35,6 +35,5 @@ public class EndPointHandler : BaseHandler
         {
             methodInfo.Invoke(classInstance, [context]);
         }
-
     }
 }
