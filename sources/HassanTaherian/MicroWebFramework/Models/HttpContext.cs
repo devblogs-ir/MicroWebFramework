@@ -1,8 +1,20 @@
+using System;
+
 namespace MicroWebFramework;
 public class HttpContext
 {
-    public required string IpAdrress { get; init; }
-    public required Guid Id { get; init; }
-    public required HttpRequest Request { get; init; }
-    public required HttpResponse Response { get; init; }
+    public HttpContext(string ipAdrress, string requestedUrl)
+    {
+        Id = Guid.NewGuid();
+        IpAddress = ipAdrress;
+        Request = new HttpRequest()
+        {
+            Url = requestedUrl
+        };
+        Response = new();
+    }
+    public string IpAddress { get; init; }
+    public Guid Id { get; init; }
+    public HttpRequest Request { get; init; }
+    public HttpResponse Response { get; init; }
 }

@@ -1,4 +1,5 @@
 ﻿using Dumpify;
+using System;
 using System.Net;
 using System.Text;
 
@@ -10,51 +11,76 @@ public class HttpAdapter : IUiAdapter
 
     public HttpAdapter(string url)
     {
-        _listener = new HttpListener();
-        if (!url.EndsWith('/'))
-        {
-            url += "/";
-        }
-        _listener.Prefixes.Add(url);
-        _listener.Start();
+        url = FormtServerUrl(url);
+        _listener = SetupHttpListener(url);
         $"HTTP Server is Listening at {url}".Dump();
         _unresponsedRequests = [];
     }
 
+    private static string FormtServerUrl(string url)
+    {
+        return url.EndsWith('/') ? url : url + "/";
+    }
+
+    private static HttpListener SetupHttpListener(string url)
+    {
+        HttpListener httpListener = new();
+        httpListener.Prefixes.Add(url);
+        httpListener.Start();
+        return httpListener;
+    }
+
     public async Task<HttpContext?> GetRequestAsync()
     {
-        var context = await _listener.GetContextAsync();
+        var httpListenerContext = await _listener.GetContextAsync();
 
-        var requestedUrl = context.Request.RawUrl;
+        var requestedUrl = GetUrl(httpListenerContext.Request);
+        var clientIpAddress = httpListenerContext.Request.RemoteEndPoint.Address.MapToIPv4()
+                                                                                .ToString();
+
+        if (requestedUrl is null || clientIpAddress is null)
+        {
+            return null;
+        }
+
+        var httpContext = new HttpContext(ipAdrress: clientIpAddress, requestedUrl: requestedUrl);
+
+        _unresponsedRequests.Add(httpContext.Id, httpListenerContext);
+
+        return httpContext;
+    }
+
+    private static string? GetUrl(HttpListenerRequest request)
+    {
+        var requestedUrl = request.RawUrl;
+
+        if (requestedUrl is null)
+        {
+            return null;
+        }
 
         if (requestedUrl.StartsWith('/'))
         {
             requestedUrl = requestedUrl[1..];
         }
 
-        var httpContext = new HttpContext
-        {
-            Id = Guid.NewGuid(),
-            IpAdrress = context.Request.RemoteEndPoint.Address.MapToIPv4().ToString(),
-            Request = new HttpRequest()
-            {
-                Url = requestedUrl
-            },
-            Response = new()
-        };
-
-        _unresponsedRequests.Add(httpContext.Id, context);
-
-        return httpContext;
+        return requestedUrl;
     }
 
     public void SendResponse(HttpContext context)
     {
-        var httpListenerResponse = _unresponsedRequests[context.Id];
+        var response = _unresponsedRequests[context.Id].Response;
+
         string message = context.Response.Message is null ? "EmptyResponse!" : context.Response.Message;
-        var buffer = Encoding.UTF8.GetBytes(message);
-        httpListenerResponse.Response.OutputStream.Write(buffer, 0, buffer.Length);
-        httpListenerResponse.Response.Close();
+        WriteMessageToResponseStream(response, message);
+
         _unresponsedRequests.Remove(context.Id);
+    }
+
+    private static void WriteMessageToResponseStream(HttpListenerResponse response, string message)
+    {
+        var buffer = Encoding.UTF8.GetBytes(message);
+        response.OutputStream.Write(buffer, 0, buffer.Length);
+        response.Close();
     }
 }

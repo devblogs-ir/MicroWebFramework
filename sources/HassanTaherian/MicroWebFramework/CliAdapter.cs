@@ -40,16 +40,7 @@ public class CliAdapter : IUiAdapter
         var ip = GetCliOption("ip");
         var url = GetCliOption("url");
 
-        HttpContext request = new()
-        {
-            Id = Guid.NewGuid(),
-            IpAdrress = ip.Value,
-            Request = new()
-            {
-                Url = url.Value
-            },
-            Response = new()
-        };
+        HttpContext request = new(ip?.Value, url?.Value);
 
         return request;
     }
