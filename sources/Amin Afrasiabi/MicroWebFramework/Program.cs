@@ -4,7 +4,6 @@ using PipelineDesignPattern.Pipelines.Builder;
 using System.Net;
 using System.Text;
 
-
 var pipe = new PipelineBuilder().AddPipe<ExceptionHandlingPipe>()
                         .AddPipe<AuthenticationPipe>()
                         .AddPipe<AuthenticationPipe>()
