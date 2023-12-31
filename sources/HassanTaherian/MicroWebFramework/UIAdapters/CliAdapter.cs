@@ -1,13 +1,17 @@
 ﻿using Dumpify;
+using System;
 
 namespace MicroWebFramework;
 public class CliAdapter : IUiAdapter
 {
     private readonly IList<CliOption> options;
+    private readonly IPipelineDirector _pipelineDirector;
+    private readonly IDictionary<Guid, HttpContext> _unresponsedRequest;
 
-    public CliAdapter(string[] args)
+    public CliAdapter(string[] args, IPipelineDirector pipelineDirector)
     {
         options = ExtractOptions(args);
+        _pipelineDirector = pipelineDirector;
     }
 
     private IList<CliOption> ExtractOptions(string[] args)
@@ -23,26 +27,6 @@ public class CliAdapter : IUiAdapter
             }
         }
         return options;
-    }
-
-    public HttpContext? GetRequest()
-    {
-        try
-        {
-            ValidateOptions();
-        }
-        catch (CliOptionNotProvidedException exception)
-        {
-            exception.Message.Dump("UI Error");
-            return null;
-        }
-
-        var ip = GetCliOption("ip");
-        var url = GetCliOption("url");
-
-        HttpContext request = new(ip?.Value, url?.Value);
-
-        return request;
     }
 
     private void ValidateOptions()
@@ -69,11 +53,26 @@ public class CliAdapter : IUiAdapter
 
     public void SendResponse(HttpContext context)
     {
-        throw new NotImplementedException();
+        context.Response.Message.Dump();
     }
 
     public Task<HttpContext?> GetRequestAsync()
     {
-        throw new NotImplementedException();
+        try
+        {
+            ValidateOptions();
+        }
+        catch (CliOptionNotProvidedException exception)
+        {
+            exception.Message.Dump("UI Error");
+            return null;
+        }
+
+        var ip = GetCliOption("ip");
+        var url = GetCliOption("url");
+
+        HttpContext request = new(ip?.Value, url?.Value);
+
+        return Task.FromResult(request);
     }
 }
