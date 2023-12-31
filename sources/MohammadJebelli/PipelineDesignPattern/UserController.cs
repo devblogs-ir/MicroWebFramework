@@ -18,7 +18,6 @@ public class UserController
     }
 
     public string GetAll() => $"Return all users for IP: {_context.IP}";
-
     public string GetById(string id) => $"Return user by id {id}";
 
 }

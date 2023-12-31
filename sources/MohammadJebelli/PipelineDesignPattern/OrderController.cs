@@ -18,7 +18,6 @@ public class OrderController
     }
 
     public string GetAll() => $"Return all orders for IP: {_context.IP}";
-
     public string GetById(string id) => $"Return order by id {id}";
 
 }

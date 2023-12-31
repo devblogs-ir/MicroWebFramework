@@ -14,10 +14,11 @@ public class EndPointPipe : Pipe
     {
     }
 
+    private int _controllerIndex = 1, _actionIndex=2, _lastUrlIndex=3;
+
     public override void Handle(HttpContext httpContext)
     {
         var splitted = httpContext.Url.Split('/');
-
         var partsCount = splitted.Length;
 
         if (partsCount < 3)
@@ -25,11 +26,9 @@ public class EndPointPipe : Pipe
             httpContext.HttpResponse += "";
             return;
         }
-        var ControllerName = splitted[1].FirstLetterToUpper();
-        var ActionName = splitted[2].FirstLetterToUpper();
-
-        var requestParameters = splitted.Skip(3).Take(partsCount - 3);
-
+        var ControllerName = splitted[_controllerIndex].FirstLetterToUpper();
+        var ActionName = splitted[_actionIndex].FirstLetterToUpper();
+        var requestParameters = splitted.Skip(_lastUrlIndex).Take(partsCount - _lastUrlIndex);
         var templateControllerName = $"PipelineDesignPattern.{ControllerName}Controller";
 
         var type = Type.GetType(templateControllerName);
@@ -39,10 +38,15 @@ public class EndPointPipe : Pipe
             httpContext.HttpResponse += "Endpoint not found!";
             return;
         }
+
         var instance = Activator.CreateInstance(type, new[] { httpContext });
+        var method = type.GetMethod(ActionName);
 
-        MethodInfo method = type.GetMethod(ActionName);
-
+        if (method is null)
+        {
+            httpContext.HttpResponse += "Endpoint not found!";
+            return;
+        }
         var actionParams = method.GetParameters();
 
         if (actionParams is not null && actionParams.Length != requestParameters?.Count())
@@ -50,9 +54,9 @@ public class EndPointPipe : Pipe
             httpContext.HttpResponse += "Parameter mismatch";
             return;
         }
-        var result = method.Invoke(instance, requestParameters.ToArray());
 
-        httpContext.HttpResponse += result;
+        var result = method.Invoke(instance, requestParameters.ToArray());
+        httpContext.HttpResponse += result?.ToString();
     }
 }
 

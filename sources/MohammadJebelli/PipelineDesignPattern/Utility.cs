@@ -8,16 +8,15 @@ namespace PipelineDesignPattern;
 
 public static class Utility
 {
-    public const string FAVICON = "favicon.ico";
-    public static string FirstLetterToUpper(this string str)
+    public static string FirstLetterToUpper(this string stringToModify)
     {
-        if (str == null)
+        if (stringToModify is null)
             return null;
 
-        if (str.Length > 1)
-            return char.ToUpper(str[0]) + str.Substring(1);
+        if (stringToModify.Length > 1)
+            return $"{char.ToUpper(stringToModify[0])}{stringToModify[1..]}";
 
-        return str.ToUpper();
+        return stringToModify.ToUpper();
     }
 
 }

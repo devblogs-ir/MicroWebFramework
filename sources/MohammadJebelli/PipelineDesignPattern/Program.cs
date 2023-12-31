@@ -6,6 +6,7 @@ using System.Text;
 var httpListener = new HttpListener();
 
 var localhostPrefix = "http://localhost:3998/";
+const string FAVICON = "favicon.ico";
 
 httpListener.Prefixes.Add(localhostPrefix);
 
@@ -19,7 +20,7 @@ while (true)
     var requestUrl = context.Request.Url.AbsolutePath;
 
     // ignore favicon request for chrome
-    if (requestUrl.Contains(Utility.FAVICON))
+    if (requestUrl.Contains(FAVICON))
     {
         context.Response.StatusCode = (int)HttpStatusCode.NotFound;
         context.Response.Close();
@@ -43,15 +44,11 @@ while (true)
         handler(httpContext1);
 
     var buffer = Encoding.UTF8.GetBytes(httpContext1.HttpResponse);
-
     context.Response.OutputStream.Write(buffer, 0, buffer.Length);
-
     context.Response.Close();
 }
 
 
-Console.ReadKey();
-httpListener.Stop();
 
 
 

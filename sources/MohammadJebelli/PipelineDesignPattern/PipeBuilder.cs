@@ -9,7 +9,7 @@ namespace PipelineDesignPattern;
 
 public class PipeBuilder
 {
-    private List<Type> _pipes = new List<Type>();
+    private List<Type> _pipes = [];
 
     public PipeBuilder AddPipe<TType>()
     {
