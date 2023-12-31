@@ -13,7 +13,7 @@ public class ProductsController
     public void GetAllProducts()
     {
         _httpContext.Response.OutputStream.Write(
-                EncodingService.GetBytes("List of all products."));
+                Encoding.UTF8.GetBytes("List of all products."));
     }
     List<User> users = new List<User>()
     {
@@ -30,11 +30,11 @@ public class ProductsController
         if (!users.Any(p => p.Id == id))
         {
             _httpContext.Response.OutputStream.Write(
-                EncodingService.GetBytes($"No user was found with id: {id}!!"));
+                Encoding.UTF8.GetBytes($"No user was found with id: {id}!!"));
             return;
         }
         _httpContext.Response.OutputStream.Write(
-                EncodingService.GetBytes(
+                Encoding.UTF8.GetBytes(
                     users.SingleOrDefault(p => p.Id == id).Name));
         return;
     }

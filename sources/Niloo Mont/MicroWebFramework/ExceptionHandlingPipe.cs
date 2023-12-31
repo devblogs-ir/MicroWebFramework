@@ -1,6 +1,4 @@
-﻿using System.Text;
-
-namespace MicroWebFramework;
+﻿namespace MicroWebFramework;
 
 public class ExceptionHandlingPipe : BasePipe
 {
@@ -18,8 +16,7 @@ public class ExceptionHandlingPipe : BasePipe
         }
         catch (BannedIPException ex)
         {
-            context.Response.OutputStream.Write(
-                EncodingService.GetBytes(ex.Message));
+            ex.Message.Dump();
         }
     }
 }

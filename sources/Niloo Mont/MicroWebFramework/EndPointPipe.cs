@@ -9,8 +9,7 @@ public class EndPointPipe : BasePipe
     }
     public override void Handle(HttpContext context)
     {
-        context.Response.OutputStream.Write(
-            EncodingService.GetBytes("Routing..."));
+        "Routing...".Dump();
         try
         {
             var parts = context.Url.Split('/');
@@ -57,23 +56,19 @@ public class EndPointPipe : BasePipe
         }
         catch (NoControllerProvidedException ex)
         {
-            context.Response.OutputStream.Write(
-                EncodingService.GetBytes(ex.Message));
+            ex.Message.Dump();
         }
         catch (NoActionProvidedException ex)
         {
-            context.Response.OutputStream.Write(
-                EncodingService.GetBytes(ex.Message));
+            ex.Message.Dump();
         }
         catch (RouteNotFoundException ex)
         {
-            context.Response.OutputStream.Write(
-                EncodingService.GetBytes(ex.Message));
+            ex.Message.Dump();
         }
         catch (Exception ex)
         {
-            context.Response.OutputStream.Write(
-                EncodingService.GetBytes(ex.Message));
+            ex.Message.Dump();
         }
     }
 }

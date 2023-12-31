@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Text;
+using System.Text.Json;
 
 namespace MicroWebFramework;
 public class OrdersController
@@ -27,7 +28,7 @@ public class OrdersController
             WriteIndented = true
         });
         _httpContext.Response.OutputStream.Write(
-                EncodingService.GetBytes(ordersJson));
+                Encoding.UTF8.GetBytes(ordersJson));
     }
 
     // Orders/GetOrderById/{id}
@@ -36,11 +37,11 @@ public class OrdersController
         if (!orders.Any(p => p.Id == id))
         {
             _httpContext.Response.OutputStream.Write(
-                EncodingService.GetBytes($"No order was found with id: {id}!"));
+                Encoding.UTF8.GetBytes($"No order was found with id: {id}!"));
             return;
         }
         _httpContext.Response.OutputStream.Write(
-                EncodingService.GetBytes(
+                Encoding.UTF8.GetBytes(
                     orders.SingleOrDefault(p => p.Id == id).Title));
         return;
     }
