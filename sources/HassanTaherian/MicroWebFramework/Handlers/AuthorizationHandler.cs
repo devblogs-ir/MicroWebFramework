@@ -1,6 +1,6 @@
 ﻿using Dumpify;
 
-namespace PipelineDesignPattern;
+namespace MicroWebFramework;
 public class AuthorizationHandler : BaseHandler
 {
     private readonly IIpService _ipService;

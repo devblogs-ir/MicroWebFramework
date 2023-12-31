@@ -1,7 +1,7 @@
 ﻿using Dumpify;
 using System;
 
-namespace PipelineDesignPattern;
+namespace MicroWebFramework;
 public class RoutingHandler : BaseHandler
 {
     private readonly (int Min, int Max) _subRoutesNumberRange = (2, 3);

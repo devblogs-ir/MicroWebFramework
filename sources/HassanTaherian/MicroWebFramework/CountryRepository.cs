@@ -1,4 +1,4 @@
-﻿namespace PipelineDesignPattern;
+﻿namespace MicroWebFramework;
 public class CountryRepository : ICountryRepository
 {
     // Assume that this data will genertate by some sort of Data Access layer

@@ -1,4 +1,4 @@
-namespace PipelineDesignPattern;
+namespace MicroWebFramework;
 public class HttpContext
 {
     public required string IpAdrress { get; init; }

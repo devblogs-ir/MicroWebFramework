@@ -1,4 +1,4 @@
-namespace PipelineDesignPattern;
+namespace MicroWebFramework;
 
 using Dumpify;
 

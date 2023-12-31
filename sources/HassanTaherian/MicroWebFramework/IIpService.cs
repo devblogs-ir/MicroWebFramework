@@ -1,4 +1,4 @@
-namespace PipelineDesignPattern;
+namespace MicroWebFramework;
 
 public interface IIpService
 {

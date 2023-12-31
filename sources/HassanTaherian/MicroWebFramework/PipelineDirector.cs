@@ -1,6 +1,6 @@
 ﻿using Dumpify;
 
-namespace PipelineDesignPattern;
+namespace MicroWebFramework;
 public class PipelineDirector : IPipelineDirector
 {
     private PipelineBuilder pipelineBuilder { get; init; }

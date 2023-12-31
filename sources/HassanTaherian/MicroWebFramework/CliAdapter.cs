@@ -1,7 +1,6 @@
 ﻿using Dumpify;
-using PipelineDesignPattern.Exceptions;
 
-namespace PipelineDesignPattern;
+namespace MicroWebFramework;
 public class CliAdapter : IUiAdapter
 {
     private readonly IList<CliOption> options;

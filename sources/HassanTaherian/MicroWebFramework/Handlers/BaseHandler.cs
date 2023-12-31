@@ -1,4 +1,4 @@
-﻿namespace PipelineDesignPattern;
+﻿namespace MicroWebFramework;
 public abstract class BaseHandler
 {
     protected Action<HttpContext>? next;

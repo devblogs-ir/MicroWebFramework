@@ -1,6 +1,6 @@
 ﻿using System.Reflection;
 
-namespace PipelineDesignPattern;
+namespace MicroWebFramework;
 public class EndPointHandler : BaseHandler
 {
     public override void Handle(HttpContext context)

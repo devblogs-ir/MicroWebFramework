@@ -1,4 +1,4 @@
-﻿namespace PipelineDesignPattern;
+﻿namespace MicroWebFramework;
 public class PipelineBuilder
 {
     private BaseHandler? entryPoint { get; set; }

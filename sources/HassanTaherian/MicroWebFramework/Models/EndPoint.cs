@@ -1,4 +1,4 @@
-﻿namespace PipelineDesignPattern;
+﻿namespace MicroWebFramework;
 public record EndPoint
 {
     public required string ControllerName { get; set; }
