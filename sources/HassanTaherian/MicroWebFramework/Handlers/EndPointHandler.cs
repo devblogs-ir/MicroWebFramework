@@ -12,7 +12,7 @@ public class EndPointHandler : BaseHandler
             return;
         }
 
-        var type = Assembly.GetExecutingAssembly().GetType($"PipelineDesignPattern.{endPoint.ControllerName}Controller");
+        var type = Assembly.GetExecutingAssembly().GetType($"MicroWebFramework.{endPoint.ControllerName}Controller");
 
         if (type is null)
         {

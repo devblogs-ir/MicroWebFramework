@@ -74,4 +74,14 @@ public class CliAdapter : IUiAdapter
     {
         return options.FirstOrDefault(option => option.Name == name);
     }
+
+    public void SendResponse(HttpContext context)
+    {
+        throw new NotImplementedException();
+    }
+
+    public Task<HttpContext?> GetRequestAsync()
+    {
+        throw new NotImplementedException();
+    }
 }

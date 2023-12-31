@@ -1,5 +1,6 @@
 ﻿namespace MicroWebFramework;
 public interface IUiAdapter
 {
-    HttpContext? GetRequest();
+    Task<HttpContext?> GetRequestAsync();
+    void SendResponse(HttpContext context);
 }

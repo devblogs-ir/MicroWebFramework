@@ -1,9 +1,15 @@
-﻿using MicroWebFramework;
+﻿using Dumpify;
+using MicroWebFramework;
 
-IUiAdapter uiAdapter = new CliAdapter(args);
-var request = uiAdapter.GetRequest();
+var url = "http://localhost:9083";
+IUiAdapter uiAdapter = new HttpAdapter(url);
 
-if (request is not null)
+while (true)
 {
-    new PipelineDirector().Process(request);
+    var request = await uiAdapter.GetRequestAsync();
+
+    if (request is not null)
+    {
+        new PipelineDirector().Process(request);
+    }
 }
