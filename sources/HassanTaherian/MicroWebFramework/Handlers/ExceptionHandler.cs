@@ -11,6 +11,7 @@ public class ExceptionHandler : BaseHandler
         }
         catch (ApplicationException ex)
         {
+            httpContext.Response.Message = ex.Message;  
             ex.Message.Dump("!!!Application Error!!!");
         }
         finally
