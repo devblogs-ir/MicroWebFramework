@@ -4,24 +4,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PipelineDesignPattern.Controllers
+namespace PipelineDesignPattern.Controllers;
+public class NonController : BaseController
 {
-    internal class NonController
+    public NonController(HttpContext context)
     {
-        private readonly HttpContext _context;
-        public NonController(HttpContext context)
-        {
-            _context = context;
+        _context = context;
+    }
+    public void Exception()
+    {
+        if (this._context.Url.Split('/')[1] == "favicon.ico") {
+            return;
         }
-        public void Exception()
+        else
         {
-            if (this._context.Url.Split('/')[1] == "favicon.ico") {
-                return;
-            }
-            else
-            {
-                _context.Response = "404: Page Not Found";
-            }
+            _context.Response = "404: Page Not Found";
         }
     }
 }

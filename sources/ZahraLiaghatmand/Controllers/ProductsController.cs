@@ -1,7 +1,6 @@
 namespace PipelineDesignPattern.Controllers;
-public class ProductsController
+public class ProductsController : BaseController
 {
-    private readonly HttpContext _context;
     public ProductsController(HttpContext context)
     {
         _context = context;

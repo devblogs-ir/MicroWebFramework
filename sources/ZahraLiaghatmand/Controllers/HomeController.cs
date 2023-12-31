@@ -4,19 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace PipelineDesignPattern.Controllers
+namespace PipelineDesignPattern.Controllers;
+public class HomeController : BaseController
 {
-    internal class HomeController
+    public HomeController(HttpContext context) => _context = context;
+    public void Index()
     {
-        private readonly HttpContext _context;
-        public HomeController(HttpContext context)
-        {
-            _context = context;
-        }
-        public void Index()
-        {
-            Console.WriteLine("Welcome to Home");
-            _context.Response += "Welcome to Home";
-        }
+        Console.WriteLine("Welcome to Home");
+        _context.Response += "Welcome to Home";
     }
 }

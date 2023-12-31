@@ -36,4 +36,3 @@ Console.WriteLine($"start listening to {httpContext} ...");
     httpContext.Response.OutputStream.Write(buffer, 0, buffer.Length);
     httpContext.Response.Close();
 }
-    Console.WriteLine("end of program");
