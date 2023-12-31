@@ -6,7 +6,7 @@ namespace MicroWebFramework;
 public class HttpAdapter : IUiAdapter
 {
     private readonly HttpListener _listener;
-    private Dictionary<int, HttpListenerContext> _unresponsedRequests;
+    private Dictionary<Guid, HttpListenerContext> _unresponsedRequests;
 
     public HttpAdapter(string url)
     {
@@ -34,12 +34,13 @@ public class HttpAdapter : IUiAdapter
 
         var httpContext = new HttpContext
         {
-            Id = 1,
+            Id = Guid.NewGuid(),
             IpAdrress = context.Request.RemoteEndPoint.Address.MapToIPv4().ToString(),
             Request = new HttpRequest()
             {
                 Url = requestedUrl
-            }
+            },
+            Response = new()
         };
 
         _unresponsedRequests.Add(httpContext.Id, context);
@@ -49,6 +50,11 @@ public class HttpAdapter : IUiAdapter
 
     public void SendResponse(HttpContext context)
     {
-        throw new NotImplementedException();
+        var httpListenerResponse = _unresponsedRequests[context.Id];
+        string message = context.Response.Message is null ? "EmptyResponse!" : context.Response.Message;
+        var buffer = Encoding.UTF8.GetBytes(message);
+        httpListenerResponse.Response.OutputStream.Write(buffer, 0, buffer.Length);
+        httpListenerResponse.Response.Close();
+        _unresponsedRequests.Remove(context.Id);
     }
 }

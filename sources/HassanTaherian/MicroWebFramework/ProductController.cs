@@ -6,11 +6,11 @@ public class ProductController
 {
     public void GetUsers(HttpContext httpContext)
     {
-        "All Users".Dump();
+        httpContext.Response.Message = "All Users";
     }
 
     public void GetUserById(HttpContext httpContext, int id)
     {
-        $"Single User {id}".Dump();
+        httpContext.Response.Message = $"User {id}";
     }
 }

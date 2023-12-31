@@ -26,7 +26,7 @@ public class PipelineDirector : IPipelineDirector
                        .AddHandler(endPointHandler);
     }
 
-    public void Process(HttpContext context)
+    public HttpContext Process(HttpContext context)
     {
         $"Processing Request {context.Id}".Dump();
 
@@ -34,5 +34,6 @@ public class PipelineDirector : IPipelineDirector
 
         $"End Process of Request {context.Id}".Dump();
         Console.WriteLine("\n");
+        return context;
     }
 }

@@ -42,12 +42,13 @@ public class CliAdapter : IUiAdapter
 
         HttpContext request = new()
         {
-            Id = 1,
+            Id = Guid.NewGuid(),
             IpAdrress = ip.Value,
             Request = new()
             {
                 Url = url.Value
-            }
+            },
+            Response = new()
         };
 
         return request;

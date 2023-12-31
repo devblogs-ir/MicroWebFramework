@@ -3,6 +3,7 @@ using MicroWebFramework;
 
 var url = "http://localhost:9083";
 IUiAdapter uiAdapter = new HttpAdapter(url);
+IPipelineDirector pipelineDirector = new PipelineDirector();
 
 while (true)
 {
@@ -10,6 +11,7 @@ while (true)
 
     if (request is not null)
     {
-        new PipelineDirector().Process(request);
+        var context = pipelineDirector.Process(request);
+        uiAdapter.SendResponse(context);
     }
 }
