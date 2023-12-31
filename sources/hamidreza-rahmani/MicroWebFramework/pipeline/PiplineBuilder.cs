@@ -10,7 +10,7 @@ public class PiplineBuilder
         return this;
     }
 
-    public PiplineBuilder Add<TType>()
+    public PiplineBuilder Add<TType>() where TType : Pipe
     {
         return Add(typeof(TType));
     }
