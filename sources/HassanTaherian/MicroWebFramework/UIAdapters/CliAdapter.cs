@@ -5,13 +5,10 @@ namespace MicroWebFramework;
 public class CliAdapter : IUiAdapter
 {
     private readonly IList<CliOption> options;
-    private readonly IPipelineDirector _pipelineDirector;
-    private readonly IDictionary<Guid, HttpContext> _unresponsedRequest;
 
-    public CliAdapter(string[] args, IPipelineDirector pipelineDirector)
+    public CliAdapter(string[] args)
     {
         options = ExtractOptions(args);
-        _pipelineDirector = pipelineDirector;
     }
 
     private IList<CliOption> ExtractOptions(string[] args)
