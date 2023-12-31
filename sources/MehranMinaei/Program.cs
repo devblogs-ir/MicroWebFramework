@@ -6,7 +6,7 @@ using Framework;
 using Pipeline;
 
 
-var addr = "http://localhost:9823/";
+var addr = "http://localhost:9826/";
 var httplistener = new HttpListener();
 httplistener.Prefixes.Add(addr);
 
@@ -24,6 +24,7 @@ try {
             .AddPipe<AuthenticationHandler>()
             .AddPipe<EndpoindHandler>().Build();
              pipes(httpContext);
+            httplistener.Stop();
 
         }
    
@@ -36,4 +37,5 @@ finally { }
 /*ProductController d = new ProductController();
 await d.GetProductsAPIAsync();*/
 Console.ReadKey();
+
 

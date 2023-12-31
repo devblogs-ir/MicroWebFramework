@@ -22,7 +22,7 @@ public class EndpoindHandler : Pipe
         var path = context?.Request?.Url?.LocalPath.Split('/', StringSplitOptions.RemoveEmptyEntries);
         if (path?.Length < 2)
             throw new EntryPointNotFoundException();
-        var controllerName = $"{path?[0]}Controller";  
+        var controllerName = $"Controller.{path?[0]}Controller";  
         var actionName = path?[1];
         var controllerType = Type.GetType(controllerName, throwOnError: false, ignoreCase: true)!;
         var controllerInstance = Activator.CreateInstance(controllerType);
@@ -33,6 +33,11 @@ public class EndpoindHandler : Pipe
             throw new EntryPointNotFoundException();
         
         PropertyInfo property = controllerType?.GetProperty("HttpContext")!;
+         if (property is not null && property.CanWrite)
+        {
+            property.SetValue(controllerInstance, context);
+        }
+        
         method?.Invoke(controllerInstance, parameters.Length > 0 ?
                 new[] { Convert.ChangeType(path?[2], parameters[0].ParameterType) } :
                 null);
