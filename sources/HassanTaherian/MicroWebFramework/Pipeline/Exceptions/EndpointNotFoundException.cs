@@ -1,4 +1,4 @@
 ﻿namespace MicroWebFramework;
-public class EndPointNotFoundException(string url) : ApplicationException(Messages.EndPointNotFoundException(url))
+public class EndPointNotFoundException(string url) : PipelineException(Messages.EndPointNotFoundException(url))
 {
 }

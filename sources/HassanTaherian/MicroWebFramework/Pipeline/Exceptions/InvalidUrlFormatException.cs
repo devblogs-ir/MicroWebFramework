@@ -1,4 +1,4 @@
 ﻿namespace MicroWebFramework;
-public class InvalidUrlFormatException(string url) : ApplicationException(Messages.InvalidUrlFormatException(url))
+public class InvalidUrlFormatException(string url) : PipelineException(Messages.InvalidUrlFormatException(url))
 {
 }

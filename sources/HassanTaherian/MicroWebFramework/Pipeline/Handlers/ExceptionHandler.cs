@@ -9,7 +9,7 @@ public class ExceptionHandler : BaseHandler
         {
             next?.Invoke(httpContext);
         }
-        catch (ApplicationException ex)
+        catch (PipelineException ex)
         {
             httpContext.Response.Message = ex.Message;  
             ex.Message.Dump("!!!Application Error!!!");
