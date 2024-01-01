@@ -12,7 +12,7 @@ public class SetOrderController(HttpContext httpContext)
 {
     private readonly HttpContext _httpContext = httpContext;
 
-    List<Order> orders = new List<Order>()
+    List<Order> orders = new()
     {
         new Order() { Id = 1, Name = "Order1" },
         new Order() { Id = 2, Name = "Order2" },
