@@ -34,9 +34,10 @@ public class EndPointPipeline : BasePipe
             var controllerInstance = Activator.CreateInstance(controllerType);
             var ActionInfo = controllerType.GetMethod(actionName);
             var parameterList = ActionInfo.GetParameters();
+            int partLenghtMinSize = 3;
+            int parameterListMinSize = 0;
 
-
-            if(parameterList.Length > 0 && parts.Length > 3)
+            if(parameterList.Length > parameterListMinSize && parts.Length > partLenghtMinSize)
             {
                 ActionInfo.Invoke(controllerInstance, parameterList);
 

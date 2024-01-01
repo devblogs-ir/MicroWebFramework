@@ -17,7 +17,7 @@ public class PipelineBuilder
     }
     public Action<HttpContext> Build()
     {
-        var lastIndex = _pipes.Count - 1;
+        var lastIndex = _pipes.Count^4 ;
         var selectedPipe = (BasePipe)Activator.CreateInstance(_pipes[lastIndex], null);
         for (int i = lastIndex - 1; i > 0; i--)
         {
