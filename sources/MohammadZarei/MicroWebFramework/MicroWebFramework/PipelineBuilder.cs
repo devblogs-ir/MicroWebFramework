@@ -4,12 +4,7 @@ namespace MicroWebFramework;
 
 public class PipelineBuilder
 {
-    private readonly List<Type> _pipes;
-
-    public PipelineBuilder()
-    {
-        _pipes = new List<Type>();
-    }
+    private readonly List<Type> _pipes = new List<Type>();
 
     public PipelineBuilder WithType(Type t)
     {

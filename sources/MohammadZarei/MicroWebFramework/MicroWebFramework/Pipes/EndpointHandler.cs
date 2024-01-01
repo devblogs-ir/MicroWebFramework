@@ -24,7 +24,7 @@ public class EndpointHandler(Action<Context> next) : Pipe(next)
 
         object result;
 
-        if (parameterInfos.Length == 0)
+        if (parameterInfos.Length is 0)
         {
             var instance = Activator.CreateInstance(typeController, new[] { context });
 
@@ -43,7 +43,7 @@ public class EndpointHandler(Action<Context> next) : Pipe(next)
 
         EditingResponse(httpListenerContext, result);
 
-        if (next != null)
+        if (next is not null)
             _next.Invoke(context);
     }
 
@@ -63,10 +63,7 @@ public class EndpointHandler(Action<Context> next) : Pipe(next)
 
 public class JsonManager
 {
-    public static string ToJsonString(object obj)
-    {
-        return JsonConvert.SerializeObject(obj);
-    }
+    public static string ToJsonString(object obj) => JsonConvert.SerializeObject(obj);
 }
 
 
@@ -74,11 +71,4 @@ public class UrlExtension
 {
     public static string[] Splliter(string url) 
         => url.Replace(ApplicationConsts.BaseAddress, "").Split('/');
-}
-
-
-public class ApplicationConsts
-{
-    public static string BaseAddress = "http://localhost:7005/";
-    public static string SolutionName = "MicroWebFramework";
 }

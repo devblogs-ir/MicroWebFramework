@@ -1,6 +1,6 @@
 ﻿namespace MicroWebFramework;
 
-public sealed class User
+public class User
 {
     public required string FullName { get; init; }
 }
