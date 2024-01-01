@@ -8,14 +8,10 @@ using System.Text.Json;
 using System.Threading.Tasks;
 
 namespace MicroWebFramework.Controllers;
-public class SetOrderController
+public class SetOrderController(HttpContext httpContext)
 {
-    private readonly HttpContext _httpContext;
+    private readonly HttpContext _httpContext = httpContext;
 
-    public SetOrderController(HttpContext httpContext)
-    {
-        _httpContext = httpContext;
-    }
     List<Order> orders = new List<Order>()
     {
         new Order() { Id = 1, Name = "Order1" },
@@ -39,7 +35,7 @@ public class SetOrderController
             _httpContext.Response.OutputStream.Write(Encoding.UTF8.GetBytes($"No order was found with id: {id}!"));
             return;
         }
-        _httpContext.Response.OutputStream.Write(Encoding.UTF8.GetBytes(orders.SingleOrDefault(p => p.ID == id).Name));
+        _httpContext.Response.OutputStream.Write(Encoding.UTF8.GetBytes(orders.SingleOrDefault(p => p.Id == id).Name));
         return;
     }
 }

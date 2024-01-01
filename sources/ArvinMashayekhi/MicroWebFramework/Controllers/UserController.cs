@@ -7,14 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace MicroWebFramework.Controllers;
-public class UserController
+public class UserController(HttpContext httpContext)
 {
-    private readonly HttpContext _httpContext;
-
-    public UserController(HttpContext httpContext)
-    {
-        _httpContext = httpContext;
-    }
+    private readonly HttpContext _httpContext = httpContext;
 
     List<User> users = new List<User>()
     {
