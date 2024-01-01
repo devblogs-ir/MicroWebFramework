@@ -18,8 +18,8 @@ public class SetOrderController
     }
     List<Order> orders = new List<Order>()
     {
-        new Order() { ID = 1, Name = "Order1" },
-        new Order() { ID = 2, Name = "Order2" },
+        new Order() { Id = 1, Name = "Order1" },
+        new Order() { Id = 2, Name = "Order2" },
     };
 
     public void GetAllOrders()
@@ -34,7 +34,7 @@ public class SetOrderController
 
     public void GetOrderById(int id)
     {
-        if (!orders.Any(p => p.ID == id))
+        if (!orders.Any(p => p.Id == id))
         {
             _httpContext.Response.OutputStream.Write(Encoding.UTF8.GetBytes($"No order was found with id: {id}!"));
             return;

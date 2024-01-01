@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace MicroWebFramework.Entities;
 public class User
 {
-    public int ID { get; set; }
+    public int Id { get; set; }
     public string Name { get; set; }
 }
 

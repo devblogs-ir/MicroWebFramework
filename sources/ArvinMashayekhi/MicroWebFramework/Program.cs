@@ -38,7 +38,7 @@ void HandleRequest(HttpListenerContext httpContext)
         HttpContext request = new()
         {
             IP = httpContext.Request.RemoteEndPoint?.Address.ToString(),
-            URL = httpContext.Request.RawUrl,
+            Url = httpContext.Request.RawUrl,
             Response = httpContext.Response,
             Request = httpContext.Request
         };

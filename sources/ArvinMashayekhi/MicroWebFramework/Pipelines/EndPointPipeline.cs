@@ -19,7 +19,7 @@ public class EndPointPipeline : BasePipe
     {
         try
         {
-            var parts = httpContext.URL.Split('/');
+            var parts = httpContext.Url.Split('/');
             var controllerName = parts[1];
             var actionName = parts[2];
 
