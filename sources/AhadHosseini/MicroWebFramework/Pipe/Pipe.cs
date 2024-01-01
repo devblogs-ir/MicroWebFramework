@@ -6,13 +6,13 @@ public abstract class Pipe
 {
     public Pipe()
     {
-        _next = null!;
+        Next = null!;
     }
     public Pipe(Action<HttpContext> next)
     {
-        _next = next;
+        Next = next;
     }
-    public Action<HttpContext> _next;
+    public Action<HttpContext> Next;
 
     public abstract void Handle(HttpContext httpContext);
 }

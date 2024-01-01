@@ -26,7 +26,7 @@ public class EndPointPipe : Pipe
         string IdValue = "";
         if (UrlArray.Length == 4) IdValue = UrlArray[3];
 
-        var ControllerFullName = $"{typeof(EndPointPipe).Namespace}.Controller.{ControllerName}Controller";
+        var ControllerFullName = $"{typeof(EndPointPipe).Namespace}.Controllers.{ControllerName}Controller";
         var ControllerType = Type.GetType(ControllerFullName);
 
         MethodInfo method = ControllerType.GetMethod(ActionName);
@@ -43,7 +43,7 @@ public class EndPointPipe : Pipe
         else
             method.Invoke(instans, null);
 
-        if (_next != null) _next(httpContext);
+        if (Next is not null) Next(httpContext);
 
         "End End Point".Dump();
 

@@ -6,7 +6,7 @@ using System.Net;
 using System.Text;
 using System.Text.Json;
 
-namespace MicroWebFramework.Controller;
+namespace MicroWebFramework.Controllers;
 
 public class OrdersController : Controller
 {

@@ -12,7 +12,7 @@ public class AuthenticationPipe(Action<HttpContext> next) : Pipe(next)
         if (httpContext.Request.RemoteEndPoint.ToString().StartsWith("188"))
             throw new Exception($"The {httpContext.Request.RemoteEndPoint.ToString()} Invalid Ip");
         else
-            if (_next != null) _next(httpContext);
+            if (Next is not null) Next(httpContext);
 
         "End Authentication".Dump();
     }

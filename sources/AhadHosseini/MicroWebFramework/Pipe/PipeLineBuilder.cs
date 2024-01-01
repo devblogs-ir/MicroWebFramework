@@ -9,7 +9,7 @@ namespace MicroWebFramework;
 
 public class PipeLineBuilder()
 {
-    private List<Type> _pipe = new List<Type>();
+    private List<Type> _pipe = new ();
 
     public PipeLineBuilder AddPipe(Type pipe)
     {
@@ -17,7 +17,7 @@ public class PipeLineBuilder()
         return this;
     }
 
-    public PipeLineBuilder AddPipe<TType>()
+    public PipeLineBuilder AddPipe<TType>()where TType : Pipe
     {
         AddPipe(typeof(TType));
         return this;
@@ -25,7 +25,7 @@ public class PipeLineBuilder()
 
     public Action<HttpContext> Build()
     {
-        var pipes_ = (Pipe)Activator.CreateInstance(_pipe[_pipe.Count - 1], null);
+        var pipes_ = (Pipe)Activator.CreateInstance(_pipe[^1], null);
 
         for (int i = _pipe.Count - 2; i >= 0; i--)
         {

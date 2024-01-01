@@ -1,7 +1,7 @@
 using Dumpify;
 using MicroWebFramework.Models;
 
-namespace MicroWebFramework.Controller;
+namespace MicroWebFramework.Controllers;
 
 public class ProductsController : Controller
 {

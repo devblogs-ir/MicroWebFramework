@@ -11,7 +11,7 @@ public class ExceptionHandlingPipe(Action<HttpContext> next) : Pipe(next)
         "starting ExceptionHandling".Dump();
         try
         {
-            if (_next != null) _next(httpContext);
+            if (Next is not null) Next(httpContext);
         }
         catch (Exception ex)
         {
