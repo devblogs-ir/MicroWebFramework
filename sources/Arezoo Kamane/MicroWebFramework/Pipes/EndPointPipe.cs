@@ -1,8 +1,9 @@
 ﻿using System.Reflection;
 using System.Text.Json;
 using Dumpify;
+using MicroWebFramework.Pipeline;
 
-
+namespace MicroWebFramework.Pipes;
 public class EndPointPipe : BasePipe
 {
     public EndPointPipe(Action<HttpContext> next) : base(next) { }
@@ -22,8 +23,7 @@ public class EndPointPipe : BasePipe
         var assembly = entryAssembly ?? Assembly.GetCallingAssembly();
         string assemblyNamespace = assembly.GetName().Name;
 
-
-        var controllerTemplate = $"{controllerClass}Controller";
+        var controllerTemplate = $"{assemblyNamespace}.{controllerClass}Controller";
 
         if (Type.GetType(controllerTemplate) is Type controllerType)
         {

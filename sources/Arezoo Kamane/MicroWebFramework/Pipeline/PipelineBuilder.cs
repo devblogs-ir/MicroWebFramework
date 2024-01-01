@@ -1,7 +1,8 @@
-﻿
+﻿namespace MicroWebFramework.Pipeline;
+
 public class PipelineBuilder
 {
-    private List<Type> _pipes = new ();
+    private List<Type> _pipes = new();
 
     public PipelineBuilder UsePipe(Type pipe)
     {

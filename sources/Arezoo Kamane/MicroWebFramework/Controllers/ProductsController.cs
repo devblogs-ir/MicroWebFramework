@@ -1,15 +1,19 @@
 ﻿using Dumpify;
+using MicroWebFramework;
+using MicroWebFramework.Models;
+
+namespace MicroWebFramework.Controllers;
 
 public class ProductsController
+{
+
+    private readonly HttpContext _httpContext;
+    private readonly List<Product> _products;
+
+    public ProductsController(HttpContext httpContext)
     {
-
-        private readonly HttpContext _httpContext;
-        private readonly List<Product> _products;
-
-        public ProductsController(HttpContext httpContext)
-        {
-            _httpContext = httpContext;
-            _products = new()
+        _httpContext = httpContext;
+        _products = new()
             {
                 new Product()
                 {
@@ -27,20 +31,20 @@ public class ProductsController
                     Price = 799.99m,
                 }
             };
-        }
-
-        public List<Product> GetAllProducts()
-        {
-            
-            return _products;
-        }
-
-
-        public Product GetProductById(int id)
-        {
-            return _products.Find(t => t.Id == id);
-        }
     }
+
+    public IEnumerable<Product> GetAllProducts()
+    {
+
+        return _products;
+    }
+
+
+    public Product GetProductById(int id)
+    {
+        return _products.Find(t => t.Id == id);
+    }
+}
 
 
 

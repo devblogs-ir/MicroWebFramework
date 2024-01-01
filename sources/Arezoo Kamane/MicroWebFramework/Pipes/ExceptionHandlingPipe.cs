@@ -1,5 +1,7 @@
 ﻿using Dumpify;
+using MicroWebFramework.Pipeline;
 
+namespace MicroWebFramework.Pipes;
 
 public class ExceptionHandlingPipe : BasePipe
 {
