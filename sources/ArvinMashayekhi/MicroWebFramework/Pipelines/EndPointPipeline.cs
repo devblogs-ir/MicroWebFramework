@@ -15,7 +15,7 @@ public class EndPointPipeline : BasePipe
     {
     }
 
-    public override void PipelineHandler(HttpContext httpContext)
+    public override void Handler(HttpContext httpContext)
     {
         try
         {

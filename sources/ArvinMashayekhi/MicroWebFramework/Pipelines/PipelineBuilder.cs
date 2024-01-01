@@ -21,10 +21,10 @@ public class PipelineBuilder
         var selectedPipe = (BasePipe)Activator.CreateInstance(_pipes[lastIndex], null);
         for (int i = lastIndex - 1; i > 0; i--)
         {
-            selectedPipe = (BasePipe)Activator.CreateInstance(_pipes[i], new[] { selectedPipe.PipelineHandler });
+            selectedPipe = (BasePipe)Activator.CreateInstance(_pipes[i], new[] { selectedPipe.Handler });
         }
-        var firstPipe = (BasePipe)Activator.CreateInstance(_pipes[0], new[] { selectedPipe.PipelineHandler });
-        return firstPipe.PipelineHandler;
+        var firstPipe = (BasePipe)Activator.CreateInstance(_pipes[0], new[] { selectedPipe.Handler });
+        return firstPipe.Handler;
     }
 }
 

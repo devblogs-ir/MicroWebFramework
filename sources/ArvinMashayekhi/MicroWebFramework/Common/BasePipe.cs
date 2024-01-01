@@ -7,7 +7,7 @@ public abstract class BasePipe
     {
         _context = context;
     }
-    public abstract void PipelineHandler(HttpContext httpContext);
+    public abstract void Handler(HttpContext httpContext);
 
 }
 
