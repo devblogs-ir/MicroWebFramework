@@ -4,7 +4,7 @@ using Dumpify;
 using Newtonsoft.Json;
 using MicroWebFramework;
 
-var prefix = "http://localhost:8074/";
+var prefix = "http://localhost:1234/";
 var httpListener = new HttpListener();
 httpListener.Prefixes.Add(prefix);
 try
@@ -36,13 +36,13 @@ Task.Run(async () =>
             HttpListenerContext context = await httpListener.GetContextAsync();
 
             HttpContext httpContext = new HttpContext { Request = context.Request,Response = context.Response};
-            var handler=new PiplineBuilder()
-                .Add<ExceptionHandlingMiddleWare>()
-                .Add<AuthenticationHandlingMiddleWare>()
-                .Add<CorsHandlingMiddleWare>()
-                .Add<EndpointHandlingMiddleWare>()
-                .Build();
-            handler(httpContext);
+            var pipLine = new PipeLineBuilder()
+                 .AddPipe<ExceptionHandling>()
+                 .AddPipe<Authentication>()
+                 .AddPipe<EndPoint>()
+                 .Build();
+
+            pipLine.Handle(httpContext);
         }
         catch (Exception ex)
         {

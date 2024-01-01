@@ -1,6 +1,8 @@
 ﻿using System.Runtime.InteropServices.ComTypes;
+using MicroWebFramework.Models;
+using MicroWebFramework.PipLines;
 
-namespace PipelineDesignPattern;
+namespace MicroWebFramework.Middlewares;
 
 public class ExceptionHandling : Pipe
 {

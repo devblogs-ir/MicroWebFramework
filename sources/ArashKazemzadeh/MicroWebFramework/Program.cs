@@ -1,4 +1,10 @@
-﻿using PipelineDesignPattern;
+﻿using System.Diagnostics;
+using System.Net;
+using System.Text;
+using MicroWebFramework.Middlewares;
+using MicroWebFramework.Models;
+using MicroWebFramework.PipLines;
+using EndPoint = MicroWebFramework.Middlewares.EndPoint;
 
 namespace MicroWebFramework
 {
@@ -7,27 +13,42 @@ namespace MicroWebFramework
         static void Main(string[] args)
         {
 
-            HttpContext httpContext = new()
-            { 
-                IP = "185.185.20.177" ,
-                URL= "https://faradars.org/Products/GetById/0"
+            HttpListener listener = new HttpListener();
+            var prefix = "http://localhost:8000/";
+            listener.Prefixes.Add(prefix);
+            $"Now listening on {prefix}".Dump();
+            listener.Start();
+
+            //open browser
+            ProcessStartInfo processStart = new ProcessStartInfo
+            {
+                FileName = prefix,
+                UseShellExecute = true
             };
-         
+            Process.Start(processStart);
 
-            ProductsController productsController = new(httpContext);
 
-            //EndPoint endPoint = new(null); 
-            //Authentication authentication = new(endPoint.Handle);
-            //ExceptionHandling exceptionHandling = new(authentication.Handle);
-            //exceptionHandling.Handle(httpContext);
+            while (true)
+            {
+                var httpContext = listener.GetContext();
 
-            var pipLine = new PipeLineBuilder()
-                .AddPipe<ExceptionHandling>()
-                .AddPipe<Authentication>()
-                .AddPipe<EndPoint>()
-                .Build();
-
-            pipLine.Handle(httpContext);
+                if (httpContext.Request.Url.AbsoluteUri is null)
+                {
+                    var message = "Welcome dear friend";
+                    var buffer = Encoding.UTF8.GetBytes(message);
+                    httpContext.Response.OutputStream.Write(buffer, 0, buffer.Length);
+                    httpContext.Response.Close();
+                }
+                else
+                {
+                  var pipLine = new PipeLineBuilder()
+                        .AddPipe<ExceptionHandling>()
+                        .AddPipe<Authentication>()
+                        .AddPipe<EndPoint>()
+                        .Build();
+                  pipLine.Handle(httpContext);
+                }
+            }
         }
     }
 }

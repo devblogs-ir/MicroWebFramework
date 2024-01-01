@@ -1,8 +1,8 @@
-﻿using System.Net.Http;
-using System.Reflection;
-using static System.Net.Mime.MediaTypeNames;
+﻿using System.Reflection;
+using MicroWebFramework.Models;
+using MicroWebFramework.PipLines;
 
-namespace PipelineDesignPattern
+namespace MicroWebFramework.Middlewares
 {
     public class EndPoint : Pipe
     {
@@ -17,7 +17,7 @@ namespace PipelineDesignPattern
             string actionMethod = parts[4];
             var queryString = parts[5];
 
-            String templateControllerName = $"PipelineDesignPattern.{controllerClass}Controller";
+            string templateControllerName = $"MicroWebFramework.Controllers.{controllerClass}Controller";
 
             Type controllerType = Type.GetType(templateControllerName);
 

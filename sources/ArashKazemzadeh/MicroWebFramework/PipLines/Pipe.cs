@@ -1,4 +1,6 @@
-﻿namespace PipelineDesignPattern;
+﻿using MicroWebFramework.Models;
+
+namespace MicroWebFramework.PipLines;
 
 public abstract class Pipe
 {
@@ -8,6 +10,6 @@ public abstract class Pipe
         if (next is not null)
             _next = next;
     }
-    public Pipe(){ }
+    public Pipe() { }
     public abstract void Handle(HttpContext context);
 }
