@@ -9,9 +9,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "reza-pourabbasi", "reza-pou
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroWebFramework", "sources\reza-pourabbasi\MicroWebFramework\MicroWebFramework.csproj", "{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sara-gholampour", "sara-gholampour", "{C4D21FF5-430C-41EB-BF88-9DD973AF75D7}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MicroWebFrameWork", "sources\SaraGholampour\MicroWebFrameWork\MicroWebFrameWork.csproj", "{4C111070-6EA1-43CC-8C13-3C3D255085CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MicroWebFramework", "sources\ArvinMashayekhi\MicroWebFramework\MicroWebFramework.csproj", "{07D489E3-C75F-4905-957E-B438B1D6243D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -23,10 +21,10 @@ Global
 		{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C97AA94E-B67D-40CE-B3F7-97DFE67285F8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4C111070-6EA1-43CC-8C13-3C3D255085CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4C111070-6EA1-43CC-8C13-3C3D255085CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4C111070-6EA1-43CC-8C13-3C3D255085CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4C111070-6EA1-43CC-8C13-3C3D255085CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{07D489E3-C75F-4905-957E-B438B1D6243D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{07D489E3-C75F-4905-957E-B438B1D6243D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{07D489E3-C75F-4905-957E-B438B1D6243D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{07D489E3-C75F-4905-957E-B438B1D6243D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
