@@ -1,4 +1,6 @@
-namespace PipelineDesignPattern;
+using MicroWebFramework.Models;
+
+namespace MicroWebFramework.Controllers;
 public class ProductsController
 {
     private HttpContext _context;
@@ -12,6 +14,6 @@ public class ProductsController
     }
     public void GetById(int id)
     {
-        Console.WriteLine($"id : {id}");
+        Console.WriteLine($"Products=> id : {id}");
     }
 }

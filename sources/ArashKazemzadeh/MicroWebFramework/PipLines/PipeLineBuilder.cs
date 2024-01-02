@@ -1,8 +1,6 @@
-﻿
+﻿using MicroWebFramework.Models;
 
-using PipelineDesignPattern;
-
-namespace MicroWebFramework
+namespace MicroWebFramework.PipLines
 {
     public class PipeLineBuilder
     {
@@ -17,7 +15,7 @@ namespace MicroWebFramework
             var latestIndex = _types.Count - 1;
             var selectedPipe = Activator.CreateInstance(_types[latestIndex], null) as Pipe;
 
-            for (int index = latestIndex - 1; index > 0; index--) 
+            for (int index = latestIndex - 1; index > 0; index--)
                 selectedPipe = Activator.CreateInstance(_types[index], new Action<HttpContext>[] { selectedPipe.Handle }) as Pipe;
 
             var firstPipe = Activator.CreateInstance(_types[0], new Action<HttpContext>[] { selectedPipe.Handle }) as Pipe;

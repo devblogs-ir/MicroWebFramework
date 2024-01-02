@@ -1,8 +1,11 @@
-﻿namespace PipelineDesignPattern
+﻿using MicroWebFramework.Models;
+using MicroWebFramework.PipLines;
+
+namespace MicroWebFramework.Middlewares
 {
     public class Authentication : Pipe
     {
-        public Authentication(Action<HttpContext> next) :base(next)
+        public Authentication(Action<HttpContext> next) : base(next)
         {
         }
         public Authentication() : base() { }
